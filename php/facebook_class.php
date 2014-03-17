@@ -42,7 +42,7 @@ if (!class_exists("FBI_Facebook_News")) {
             global $wpdb;
             $lastModified = $this->config['fbi_last_update'];
             $now = date('Y-m-d H:i:s');
-            $forced = ($_SERVER['REMOTE_ADDR'] == '80.201.203.67') ? 0 : 0;
+            $forced = (isset($_GET['force_import']) && $_GET['force_import']) ? 1 : 0;
             if ($lastModified < date('Y-m-d H:i:s', strtotime('now -' . $this->config['fbi_update_interval'])) || $forced) {
                 // Request to facebook to obtain an access token.
                 $access_url = 'https://graph.facebook.com/oauth/access_token?client_id=' . $this->config['fb_app_id'] . '&client_secret=' . $this->config['fb_app_secret'] . '&grant_type=client_credentials&redirect_url=' . site_url();
@@ -51,12 +51,10 @@ if (!class_exists("FBI_Facebook_News")) {
                 // Request the public posts.
                 $json_url = 'https://graph.facebook.com/' . $this->config['fb_group_id'] . '/feed?access_token=' . $access_token;
                 $json_str = $this->_get_contents($json_url);
-                //echo '<pre>' . print_r($json_url, true) . '</pre>';
+
                 // Get only news
                 $raw_data = json_decode($json_str);
-//                if ($_SERVER['REMOTE_ADDR'] == '80.201.203.67') {
-//                    echo '<pre>' . print_r($raw_data, true) . '</pre>';
-//                }
+
                 foreach ($raw_data->data AS $v) {
                     if (!empty($v->message) && $v->from->id == $this->config['fb_group_id']) {
                         $message = $this->_getNewsContents($v->message);
@@ -66,10 +64,7 @@ if (!class_exists("FBI_Facebook_News")) {
                         if (!empty($v->source)) {
                             $v->message .= '<br /><br /><a href="' . $v->link . '" target="_blank" class="videoFB"><img src="' . $v->picture . '" alt="" /><i></i></a>';
                         }
-//                        if (!empty($v->source) && $_SERVER['REMOTE_ADDR'] == '80.201.203.67') {
-//                            echo '<pre>' . print_r($v->id, true) . '</pre>';
-//                            //die();
-//                        }
+
                         $post = array(
                             'post_author' => $this->config['fbi_id_user'],
                             'post_content' => $v->message,
@@ -84,7 +79,7 @@ if (!class_exists("FBI_Facebook_News")) {
                         if (!empty($wp_id) && !empty($wp_id->id_wp)) {
                             $post['ID'] = $wp_id->id_wp;
                         }
-                        //echo '<pre>' . print_r($post, true) . '</pre>';
+
                         $id_wp = wp_insert_post($post);
                         if (!empty($id_wp)) {
                             // Featured thumbnail
