@@ -1,7 +1,8 @@
-FB_Import
-=========
+FB_Import Wordpress Plugin
+==========================
 
-Wordpress News from Facebook Import
+Automatically import your Facebook statuses into Wordpress articles.
+It also download picture (if at lease one was published in the status) and set it as the featured image of the post.
 
 
 Usage
