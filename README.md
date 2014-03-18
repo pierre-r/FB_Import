@@ -12,3 +12,9 @@ Usage
 - You must create a Facebook Application, go to : https://developers.facebook.com/
 - When you have created your FB App, return to WP Admin Panel > Settings > Facebook Import
 - Set up the plugin
+
+TODO
+====
+
+- delete post, post field and featured image when removing post from trash
+- add option to choose the post status to publish (published or draft) 
