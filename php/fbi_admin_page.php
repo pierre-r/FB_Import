@@ -39,27 +39,27 @@ function fbi_plugin_page() {
             <?php //do_settings('fb-import-settings'); ?>
             <table class="form-table">
                 <tr valign="top">
-                    <th scope="row">App ID</th>
+                    <th scope="row">Facebook App ID</th>
                     <td><input type="text" name="fbi_app_id" value="<?php echo get_option('fbi_app_id'); ?>" /></td>
                 </tr>
 
                 <tr valign="top">
-                    <th scope="row">App Secret</th>
+                    <th scope="row">Facebook App Secret</th>
                     <td><input type="text" name="fbi_app_secret" value="<?php echo get_option('fbi_app_secret'); ?>" /></td>
                 </tr>
 
                 <tr valign="top">
-                    <th scope="row">Group ID</th>
+                    <th scope="row">Facebook Page ID</th>
                     <td><input type="text" name="fbi_group_id" value="<?php echo get_option('fbi_group_id'); ?>" /></td>
                 </tr>
 
                 <tr valign="top">
-                    <th scope="row">ID Wordpress User</th>
+                    <th scope="row">Wordpress User ID</th>
                     <td><input type="text" name="fbi_id_user" value="<?php echo get_option('fbi_id_user'); ?>" /></td>
                 </tr>
 
                 <tr valign="top">
-                    <th scope="row">ID Wordpress Category</th>
+                    <th scope="row">Wordpress Category ID</th>
                     <td><input type="text" name="fbi_category_id" value="<?php echo get_option('fbi_category_id'); ?>" /></td>
                 </tr>
 
@@ -70,8 +70,10 @@ function fbi_plugin_page() {
 
                 <tr valign="top">
                     <th scope="row">
-                        Last update
-                        <br /><small>reset this field if you want to force update</small>
+                        Last update<br />
+                        <small>
+                            if you want to force update you can reset this field  or use <a href="<?php echo site_url(); ?>/?force_import=1" target="_blank">this link</a>
+                        </small>
                     </th>
                     <td><input type="text" name="fbi_last_update" value="<?php echo get_option('fbi_last_update'); ?>" /></td>
                 </tr>
