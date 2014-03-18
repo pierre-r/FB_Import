@@ -17,5 +17,5 @@ Usage
 TODO
 ====
 
-- delete post, post field and featured image when removing post from trash
-- add option to choose the post status to publish (published or draft) 
+- delete post, post fields and featured image when permanently remove post
+- add option to choose the post status to publish (published - pending - draft) 
